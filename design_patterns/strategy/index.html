@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>策略模式</title>
+</head>
+<body>
+    <input type="text" id="salary" value="0">
+    <button onclick="handleCalcSalary('S')">S</button>
+    <button onclick="handleCalcSalary('A')">A</button>
+    <button onclick="handleCalcSalary('N')">N</button>
+    <p>
+      result: <b id="result">0</b>
+    </p>
+</body>
+<script>
+    const strategies = {
+        S: salary => salary * 4.5,
+        A: salary => salary * 3,
+        N: salary => salary * 2,
+    }
+    const calcSalary = (strategy, salary) => {
+        return strategies[strategy](salary)
+    }
+
+    const handleCalcSalary = strategy => {
+        const salary = Number(document.querySelector('#salary').value || 0);
+        const computedSalary = calcSalary(strategy, salary);
+        const resultContainer = document.querySelector('#result');
+        resultContainer.textContent = computedSalary;
+    }
+</script>
+</html>
